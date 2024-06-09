@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * switch는 ifelse와는 다른 점이 값으로 조건을 판단
+       * case로 조건을 분리하고 아무 조건도 맞지 않으면 default를 실행
+       * case에서 break를 걸지 않으면 모든 조건을 실행함 (*)
+       * switch를 벗어나는 방법은 break, return이 있음
+       * switch(변수) case(매칭할 변수의 값) default(아무것도 매칭되지 않았을 경우)
+       */
+
+      const num = Number(window.prompt());
+
+      switch (num) {
+        case 10:
+        case 20:
+        case 30: {
+          // case를 묶으면 or 조건처럼 동작
+          console.log(`num은 ${num}`);
+          break;
+        }
+        case 40: {
+          console.log("num은 40");
+          break;
+        }
+        default: {
+          console.log("찾을 수 없습니다");
+        }
+      }
+    </script>
+  </body>
+</html>
