@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict!";
+
+      /**
+       * for문을 활용하는 방법
+       *
+       * break: for문의 중단점을 생성
+       * continue: for문에서 현재 라인을 스킵하고 다음 라인 진행
+       *
+       * for in: 객체를 순회할 수 있음 (type object): 성능이 매우 좋지 않음 (아예 안쓰는 편이 좋음)
+       * for of: 배열 순회를 좀 더 편리하게 할 수 있음
+       *
+       */
+
+      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+      // break
+      for (let i = 0; i < arr.length; i++) {
+        // console.log("i", i); // 콘솔을 중단점 위에 찍나 아래에 찍나에 따라 결과가 다름
+        if (i > 6) break; // 순회를 완전히 중단
+        console.log("i", i);
+      }
+
+      console.log("-------------------------------------------");
+
+      // continue
+      for (let i = 0; i < arr.length; i++) {
+        if (i === 3) continue;
+        if (i === 7) continue;
+        if (i === 8) continue;
+        console.log("i", i);
+      }
+
+      // for in
+      const obj = {
+        a: 1,
+        b: 2,
+        c: 3,
+      };
+
+      console.log("-------------------------------------------");
+
+      for (let key in obj) {
+        console.log("key", obj[key]);
+      }
+
+      console.log("-------------------------------------------for of");
+
+      // for of
+      // 조건에 의한 증감 처리가 복잡하게 들어가지 않으면 for of를 더 권장
+      // break는 적용 가능, continue는 불가
+      for (let value of arr) {
+        console.log("value", value);
+        if (value === 7) break;
+      }
+
+      // 객체 순회를 하고 싶은 경우
+      for (let key of Object.keys(obj)) {
+        console.log("key", key);
+        console.log("value", obj[key]);
+      }
+
+      console.log("-------------------------------------------for of entries");
+      for (let [key, value] of Object.entries(obj)) {
+        console.log("key", key);
+        console.log("value", value);
+      }
+      const obj2 = {
+        ...obj,
+      };
+
+      // 구조 분해
+      // object, array 분해해서 변수에 할당
+      // 할당되는 변수의 구조 역시 object면 object, array면 array를 활용해야 함
+
+      const obj3 = {
+        a: 1,
+        b: 2,
+        c: {
+          d: 4,
+          e: 6,
+        },
+      };
+      const arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+      // 구조분해할 때 object는 해당 속성을 반드시 그대로 사용해야함
+      const {
+        a,
+        b,
+        c: { d, e },
+      } = obj3;
+      console.log("obj a", a);
+      console.log("obj b", b);
+      //console.log("obj c", c);
+      console.log("obj d", d);
+      console.log("obj e", e);
+
+      // 구조분해할 때 배열은 속성이 없기 때문에 임의 변수에 할당해야함
+      // spread로 나머지 값을 가져올 때는 반드시 가장 뒤에 배치해야함
+      const [item1, item2, item3, ...values] = arr2;
+
+      console.log("item1", item1);
+      console.log("item2", item2);
+      console.log("item3", item3);
+      console.log("values", values);
+    </script>
+  </body>
+</html>
