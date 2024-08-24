@@ -9,18 +9,6 @@
     <script>
       "use strict";
 
-      /**
-       * reduce
-       * 배열을 내가 원하는 어떤 최종적인 형태로 변환하고자 할 때
-       * reduce(callbackFn, initialValue)
-       */
-
-      const nums = [100, 3, 4, 5, 2, 4, 20];
-
-      const sum = nums.reduce((prev, cur) => prev + cur, 0);
-
-      console.log("sum", sum);
-
       const students = [
         {
           id: 1,
@@ -114,19 +102,64 @@
         },
       ];
 
-      const group = students.reduce((prev, cur) => {
-        if (!Object.hasOwn(prev, cur.level)) {
-          prev[cur.level] = [cur];
-        } else {
-          prev[cur.level].push(cur);
-        }
-        return prev;
-      }, {});
+      function Students() {
+        this.items = [];
+      }
 
-      console.log(group);
+      function Student(item) {
+        this.id = item.id;
+        this.name = item.name;
+        this.level = item.level;
+        this.age = item.age;
+        this.grade = item.grade;
+        this.major = item.major;
+        this.subjects = item.subjects;
+      }
 
-      // ** 모든 과목 분류 -- 240810 과제
-      // ** 생성자 함수로 전환 -- 240810 과제
+      Students.prototype.add = function (student) {
+        this.items.push(student);
+      };
+
+      Students.prototype.findStudent = function (name) {
+        return this.items.findIndex((item) => item.name === name);
+      };
+
+      Students.prototype.addSubject = function (name, subject) {
+        this.items[this.findStudent(name)].addSubject(subject);
+      };
+
+      Student.prototype.addSubject = function (subject) {
+        this.subjects.push(subject);
+      };
+
+      const group = new Students();
+      group.add(
+        new Student({
+          id: 1,
+          name: "홍길동",
+          level: "C",
+          age: 16,
+          grade: "10학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회", "수학"],
+        })
+      );
+
+      group.add(
+        new Student({
+          id: 2,
+          name: "김철수",
+          level: "B",
+          age: 17,
+          grade: "11학년",
+          major: "이과",
+          subjects: ["물리", "화학", "수학", "영어"],
+        })
+      );
+
+      console.log("group", group);
+      group.addSubject("홍길동", "미술");
+      console.log("group", group);
     </script>
   </body>
 </html>
