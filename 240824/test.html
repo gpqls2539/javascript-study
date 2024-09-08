@@ -148,19 +148,29 @@
             if (i === index) {
               // 잘라내기
               this.items.splice(i, 1);
+
+              //this.itemss = this.items.slice(i, i + 1);
             }
           }
         }
 
         //과제03) 특정 학생 수정 기능
-        modify(id, name, level, age, grade, major, subjects) {
+        modify(name, student) {
+          //console.log(this.items);
           const index = this.findStudent(name);
-          this.items[index].id = id;
-          this.items[index].level = level;
-          this.items[index].age = age;
-          this.items[index].grade = grade;
-          this.items[index].major = major;
-          this.items[index].subjects = subjects;
+          //console.log(index);
+
+          const prefix = this.items.slice(0, index);
+          const suffix = this.items.slice(index + 1);
+          this.items = [...prefix, student, ...suffix];
+
+          //const prefix =
+          // this.items[index].id = id;
+          // this.items[index].level = level;
+          // this.items[index].age = age;
+          // this.items[index].grade = grade;
+          // this.items[index].major = major;
+          // this.items[index].subjects = subjects;
         }
 
         addSubject(name, subject) {
@@ -278,19 +288,19 @@
       // 과제01) 과목 삭제 기능
       group.removeSubject("이영희", "영어");
 
-      // 과제02) 특정 학생 삭제 기능
-      group.delete("김철수");
-
       // 과제03) 특정 학생 정보 수정 기능
-      group.modify(
-        4,
-        "홍길동",
-        "A",
-        18,
-        "12학년",
-        "이과",
-        new Subjects(["수학", "과학", "영어"])
-      );
+      group.modify("김철수", {
+        id: 4,
+        name: "남혜빈",
+        level: "A",
+        age: 18,
+        grade: "12학년",
+        major: "이과",
+        subjects: new Subjects(["수학", "과학", "영어"]),
+      });
+
+      // 과제02) 특정 학생 삭제 기능
+      //group.delete("김철수");
 
       // 과제04) 특정 학생 정보 서술 기능
       group.makeTxt("이영희");

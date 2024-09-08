@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      const replaceIndex = 2;
+      const arr = [1, 2, 3, 4, 5];
+
+      const prefix = arr.slice(0, replaceIndex);
+      const suffix = arr.slice(replaceIndex + 1);
+      console.log("prefix", prefix);
+      console.log("suffix", suffix);
+
+      const result = [...prefix, 10, ...suffix];
+      console.log("result", result);
+    </script>
+  </body>
+</html>
