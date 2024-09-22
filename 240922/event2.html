@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .boxWrap {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 10px 0;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: #eee;
+        &.active {
+          background-color: red;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      const buttonList = [
+        {
+          id: 1,
+          name: "버튼1",
+        },
+        {
+          id: 2,
+          name: "버튼2",
+        },
+        {
+          id: 3,
+          name: "버튼3",
+        },
+      ];
+
+      const boxList = [
+        { id: 1, class: "box" },
+        { id: 2, class: "box" },
+        { id: 3, class: "box" },
+      ];
+
+      const body = document.body;
+      const btnBox = document.createElement("div");
+      btnBox.setAttribute("id", "btnBox");
+
+      // append: 타겟 내부 뒤에 dom 요소를 추가
+      body.append(btnBox);
+
+      for (let el of buttonList) {
+        const btnEl = document.createElement("button");
+        btnEl.setAttribute("id", `btn${el.id}`);
+        btnEl.textContent = el.name;
+        btnEl.addEventListener("click", () => {
+          const box = document.querySelector(`#box${el.id}`);
+          const isActive = box.classList.contains("active");
+
+          if (isActive) {
+            box.classList.remove("active");
+          } else {
+            box.classList.add("active");
+          }
+        });
+
+        btnBox.append(btnEl);
+      }
+
+      const boxWrap = document.createElement("div");
+      boxWrap.setAttribute("id", "boxWrap");
+      boxWrap.classList.add("boxWrap");
+
+      body.append(boxWrap);
+
+      for (let el of boxList) {
+        const box = document.createElement("div");
+        box.setAttribute("id", `box${el.id}`);
+        box.classList.add(el.class);
+
+        boxWrap.append(box);
+      }
+    </script>
+  </body>
+</html>
