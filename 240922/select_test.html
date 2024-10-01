@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .select {
+        width: 120px;
+        height: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      const fromOptions = [
+        "Ethan",
+        "Ava",
+        "Lucas",
+        "Mia",
+        "Caleb",
+        "Zoe",
+        "Nathan",
+        "Lily",
+        "Oliver",
+        "Grace",
+      ];
+
+      const toOptions = [];
+
+      const body = document.body;
+      const fromSelect = document.createElement("select");
+      const toSelect = document.createElement("select");
+      const toButton = document.createElement("button");
+      const fromButton = document.createElement("button");
+
+      toButton.textContent = "to selected value";
+      fromButton.textContent = "from selected value";
+
+      fromSelect.classList.add("select");
+      toSelect.classList.add("select");
+
+      fromSelect.setAttribute("multiple", true);
+      toSelect.setAttribute("multiple", true);
+
+      fromSelect.setAttribute("id", "fromSelect");
+      toSelect.setAttribute("id", "toSelect");
+
+      let selectedFromIdx = null;
+      let selectedToIdx = null;
+
+      fromSelect.addEventListener("change", (event) => {
+        const selected = event.target.value;
+        selectedFromIdx = fromOptions.findIndex(
+          (option) => option === selected
+        );
+      });
+
+      toSelect.addEventListener("change", (event) => {
+        const selected = event.target.value;
+        selectedToIdx = toOptions.findIndex((option) => option === selected);
+      });
+
+      toButton.addEventListener("click", () => {
+        const deleted = fromOptions.splice(selectedFromIdx, 1);
+        console.log("deleted", deleted);
+        console.log("fromOptions", fromOptions);
+
+        toOptions.push(deleted);
+        renderFromOptions(fromSelect, fromOptions);
+        renderFromOptions(toSelect, toOptions);
+      });
+
+      fromButton.addEventListener("click", () => {
+        const deleted = toOptions.splice(selectedToIdx, 1);
+
+        fromOptions.push(deleted);
+        renderFromOptions(toSelect, toOptions);
+        renderFromOptions(fromSelect, fromOptions);
+      });
+
+      body.append(fromSelect, toButton, fromButton, toSelect);
+
+      function renderFromOptions(targetSelect, options) {
+        options.sort();
+        targetSelect.innerHTML = `
+          ${options
+            .map((option) => `<option value='${option}'>${option}</option>`)
+            .join("")}
+        `;
+      }
+
+      renderFromOptions(fromSelect, fromOptions);
+    </script>
+  </body>
+</html>

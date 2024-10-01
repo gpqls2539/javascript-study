@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .select {
+        width: 120px;
+        height: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      const fromOptions = [
+        "Ethan",
+        "Ava",
+        "Lucas",
+        "Mia",
+        "Caleb",
+        "Zoe",
+        "Nathan",
+        "Lily",
+        "Oliver",
+        "Grace",
+      ];
+
+      const body = document.body;
+      const fromSelect = document.createElement("select");
+      const toSelect = document.createElement("select");
+      const toButton = document.createElement("button");
+      const fromButton = document.createElement("button");
+
+      // text
+      toButton.textContent = "to selected value";
+      fromButton.textContent = "from selected value";
+
+      // class
+      fromSelect.classList.add("select");
+      toSelect.classList.add("select");
+
+      // attribute
+      fromSelect.setAttribute("multiple", true);
+      toSelect.setAttribute("multiple", true);
+
+      fromSelect.setAttribute("id", "fromSelect");
+      toSelect.setAttribute("id", "toSelect");
+
+      // toButton 클릭시
+      toButton.addEventListener("click", () => {
+        // select.selectedOptions: 선택된 값이 복수일 경우 여러개의 옵션값을 가져올 수 있음
+        const select = Array.from(fromSelect.selectedOptions);
+        select.forEach((opt) => {
+          // 선택된 opt 찾아서 remove
+          opt.remove();
+
+          // toSelect 박스에 추가
+          let addOpt = document.createElement("option");
+          addOpt.setAttribute("value", opt.value);
+          addOpt.textContent = opt.value;
+          toSelect.append(addOpt);
+        });
+      });
+
+      // fromButton 클릭시
+      fromButton.addEventListener("click", () => {
+        // select.selectedOptions: 선택된 값이 복수일 경우 여러개의 옵션값을 가져올 수 있음
+        const select = Array.from(toSelect.selectedOptions);
+        select.forEach((opt) => {
+          // 선택된 opt 찾아서 remove
+          opt.remove();
+
+          // toSelect 박스에 추가
+          let addOpt = document.createElement("option");
+          addOpt.setAttribute("value", opt.value);
+          addOpt.textContent = opt.value;
+          fromSelect.append(addOpt);
+        });
+      });
+
+      body.append(fromSelect, toButton, fromButton, toSelect);
+
+      // select 박스에 opt 추가
+      for (let option of fromOptions) {
+        const item = document.createElement("option");
+        item.setAttribute("value", option);
+        item.textContent = option;
+
+        fromSelect.append(item);
+      }
+    </script>
+  </body>
+</html>
