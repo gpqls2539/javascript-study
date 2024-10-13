@@ -27,7 +27,7 @@
     <div id="container">
       <div id="box"></div>
     </div>
-    <span>0%</span>
+    <span id="percent"><span>0</span>%</span>
     <script>
       "use strict";
 
@@ -35,8 +35,42 @@
        * 프로그레스바 만들기
        * 좌우로만 슬라이드 되는 프로그레스바를 만들고
        * 현재 프로그레스바가 몇 퍼센트 이동됐는지를 텍스트로 표시
-       * test
        */
+
+      const container = document.querySelector("#container");
+      const box = document.querySelector("#box");
+      const percent = document.querySelector("#percent span");
+
+      const { width: containerWidth } = container.getBoundingClientRect();
+      const { width } = box.getBoundingClientRect();
+      let isDrag = false;
+
+      const boxHalfWidth = width / 2;
+
+      // mouseDown
+      box.addEventListener("mousedown", () => {
+        isDrag = true;
+      });
+
+      // mouseUp
+      box.addEventListener("mouseup", () => {
+        isDrag = false;
+      });
+
+      // mouseMove
+      box.addEventListener("mousemove", (event) => {
+        if (!isDrag) return;
+
+        const { layerX } = event;
+        const mouseMoveX = layerX - boxHalfWidth;
+        const maxMoveX = containerWidth - width;
+
+        if (mouseMoveX <= 0) return;
+        if (mouseMoveX >= maxMoveX) return;
+        console.log(mouseMoveX, maxMoveX);
+        box.style.transform = `translate(${mouseMoveX}px, 0)`;
+        percent.innerText = Math.round((mouseMoveX / maxMoveX) * 100);
+      });
     </script>
   </body>
 </html>
