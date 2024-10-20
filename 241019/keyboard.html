@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 100px;
+      }
+      .container {
+        display: flex;
+        gap: 0 10px;
+      }
+      .box {
+        border-radius: 10px;
+        width: 200px;
+        height: 200px;
+        background-color: darkblue;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+      .scale-up {
+        background-color: dodgerblue;
+        transform: scale(1.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box" id="key1">1</div>
+      <div class="box" id="key2">2</div>
+      <div class="box" id="key3">3</div>
+    </div>
+    <script>
+      "use strict";
+
+      const keyCode = {
+        numOne: 49,
+        numTwo: 50,
+        numThree: 51,
+      };
+
+      const kewyIdMatch = {
+        [keyCode.numOne]: "key1",
+        [keyCode.numTwo]: "key2",
+        [keyCode.numThree]: "key3",
+      };
+
+      const findTarget = (code) => {
+        const currentKeyCode = code;
+        const id = kewyIdMatch[currentKeyCode];
+        return document.querySelector(`#${id}`);
+      };
+
+      const keyDownScaleUpEvent = (event) => {
+        const target = findTarget(event.keyCode);
+        target.classList.add("scale-up");
+
+        console.log("target", target);
+      };
+      1;
+      window.addEventListener("keyup", () => {
+        const target = findTarget(event.keyCode);
+        target.classList.remove("scale-up");
+      });
+      window.addEventListener("keydown", keyDownScaleUpEvent);
+    </script>
+  </body>
+</html>
