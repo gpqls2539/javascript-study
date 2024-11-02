@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test1" class="test">
+      <div>in test</div>
+      <div>in test</div>
+      <div>in test</div>
+    </div>
+    <div id="test2" class="test" role="button">test2</div>
+    <div id="test3" class="test">test3</div>
+    <script>
+      "use strict";
+
+      /**
+       * dom selector
+       * id, class, tag name
+       * es6 이전에 자주 사용하던 dom selector
+       */
+
+      // getElementById
+      const test1 = document.getElementById("test1");
+
+      // getElementsByClassName
+      const test2 = document.getElementsByClassName("test");
+
+      // getElementsByTagName
+      const test3 = document.getElementsByTagName("div");
+
+      console.dir(test1);
+      console.dir(test2);
+      console.dir(test3);
+
+      /**
+       * querySelector, querySelectorAll
+       * 접근은 id, class, tagName, attribute 전부 가능
+       * querySelector는 단수형으로 반환
+       * querySelectorAll은 배열로 반환
+       * es6 이후부터 지원
+       */
+
+      // id select
+      const selectId = document.querySelector("#test1");
+      const selectId2 = document.querySelectorAll("#test1 > div");
+      console.log("selectId");
+      console.dir(selectId);
+      console.log("selectId2");
+      console.dir(selectId2);
+
+      // class select
+      const selectClass = document.querySelectorAll(".test");
+      console.log("selectClass");
+      console.dir(selectClass);
+
+      // tag select
+      const selectTag = document.querySelectorAll("div");
+      console.log("selectTag");
+      console.dir(selectTag);
+
+      // attribute select
+      const selectAttribute = document.querySelector("[role=button]");
+      console.log("selectAttribute");
+      console.dir(selectAttribute);
+    </script>
+  </body>
+</html>

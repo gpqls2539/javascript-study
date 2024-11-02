@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * 다중 객체 복사
+       */
+
+      const school = {
+        name: "english school",
+        students: [
+          { name: "hyebin", age: "23", gender: "female" },
+          { name: "hyebin02", age: "10", gender: "female" },
+          { name: "hyebin03", age: "30", gender: "male" },
+        ],
+      };
+
+      const copySchool = { ...school, students: [...school.students] };
+      // spread 문법으로 복사 이후 같은 property가 선언되면 기존의 property를 덮어쓴다
+
+      copySchool.name = "korean school";
+
+      console.log("school.name", school.name);
+      console.log("copySchool.name", copySchool.name);
+
+      copySchool.students[0] = { name: "nam", age: "40", gender: "male" };
+
+      console.log("school.students", school.students); // hyebin
+      console.log("copySchool.students", copySchool.students); // nam
+
+      copySchool.students[2].name = "A";
+
+      console.log("school.students[2].name", school.students[2].name); // A
+      console.log("copySchool.students[2].name", copySchool.students[2].name); // A
+    </script>
+  </body>
+</html>

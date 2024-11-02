@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      const students = [
+        {
+          id: 1,
+          name: "홍길동",
+          level: "C",
+          age: 16,
+          grade: "10학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회", "수학"],
+        },
+        {
+          id: 2,
+          name: "김철수",
+          level: "B",
+          age: 17,
+          grade: "11학년",
+          major: "이과",
+          subjects: ["물리", "화학", "수학", "영어"],
+        },
+        {
+          id: 3,
+          name: "이영희",
+          level: "C",
+          age: 15,
+          grade: "9학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회"],
+        },
+        {
+          id: 4,
+          name: "박민수",
+          level: "A",
+          age: 18,
+          grade: "12학년",
+          major: "이과",
+          subjects: ["물리", "화학", "수학"],
+        },
+        {
+          id: 5,
+          name: "최지은",
+          level: "C",
+          age: 16,
+          grade: "10학년",
+          major: "예체능",
+          subjects: ["미술", "체육", "음악", "국어"],
+        },
+        {
+          id: 6,
+          name: "강동훈",
+          level: "A",
+          age: 17,
+          grade: "11학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회", "미술"],
+        },
+        {
+          id: 7,
+          name: "정수현",
+          level: "B",
+          age: 15,
+          grade: "9학년",
+          major: "이과",
+          subjects: ["수학", "과학", "영어"],
+        },
+        {
+          id: 8,
+          name: "오진우",
+          level: "C",
+          age: 18,
+          grade: "12학년",
+          major: "예체능",
+          subjects: ["체육", "음악", "미술"],
+        },
+        {
+          id: 9,
+          name: "서유리",
+          level: "B",
+          age: 16,
+          grade: "10학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회", "역사"],
+        },
+        {
+          id: 10,
+          name: "하준호",
+          level: "A",
+          age: 17,
+          grade: "11학년",
+          major: "이과",
+          subjects: ["수학", "물리", "화학", "영어"],
+        },
+      ];
+
+      /**
+       * class라는 키워드로 선언
+       * ex) class ConstructorName {}
+       * 실제 실행 구문이 적용되는 건 constructor() 영역
+       */
+
+      // prototype 상속
+      class Count {
+        getCount() {
+          return this.items.length;
+        }
+      }
+
+      class Cars extends Count {
+        constructor(cars = []) {
+          super();
+          this.items = cars;
+        }
+      }
+
+      // Students
+      class Students extends Count {
+        constructor(items = []) {
+          super();
+          this.items = items;
+        }
+
+        add(student) {
+          this.items.push(student);
+        }
+
+        addMany(...students) {
+          for (let student of students) {
+            this.items.push(student);
+          }
+        }
+
+        // 과제02) 특정 학생 삭제 기능
+        delete(name) {
+          // 학생 name에 따른 index
+          const index = this.findStudent(name);
+          for (let i = 0; i < this.items.length; i++) {
+            // i가 학생 index와 동일할 시
+            if (i === index) {
+              // 잘라내기
+              this.items.splice(i, 1);
+
+              //this.itemss = this.items.slice(i, i + 1);
+            }
+          }
+        }
+
+        //과제03) 특정 학생 수정 기능
+        modify(name, student) {
+          //console.log(this.items);
+          const index = this.findStudent(name);
+          //console.log(index);
+
+          const prefix = this.items.slice(0, index);
+          const suffix = this.items.slice(index + 1);
+          this.items = [...prefix, student, ...suffix];
+
+          //const prefix =
+          // this.items[index].id = id;
+          // this.items[index].level = level;
+          // this.items[index].age = age;
+          // this.items[index].grade = grade;
+          // this.items[index].major = major;
+          // this.items[index].subjects = subjects;
+        }
+
+        addSubject(name, subject) {
+          const index = this.findStudent(name);
+          this.items[index].subjects.add(subject);
+        }
+
+        // 과제01) 과목 삭제 기능
+        removeSubject(name, subject) {
+          const index = this.findStudent(name);
+          this.items[index].subjects.remove(subject);
+        }
+
+        getValues() {
+          return this.items.map((item) => ({
+            ...item,
+            subjects: item.subjects.getValues(),
+          }));
+        }
+
+        findStudent(name) {
+          return this.items.findIndex((item) => item.name === name);
+        }
+
+        // 과제04) 특정 학생 정보 서술 기능
+        makeTxt(name) {
+          const index = this.findStudent(name);
+          console.log(
+            `안녕하세요! 제 이름은 [${
+              this.items[index].name
+            }]입니다. 제 나이는 [${this.items[index].age}]이고 ${
+              this.items[index].grade
+            }입니다. 좋아하는 과목은 [${this.items[
+              index
+            ].subjects.getValues()}]입니다.`
+          );
+        }
+      }
+
+      // Student
+      class Student {
+        constructor({ id, name, level, age, grade, major, subjects }) {
+          this.id = id;
+          this.name = name;
+          this.level = level;
+          this.age = age;
+          this.grade = grade;
+          this.major = major;
+          this.subjects = subjects;
+        }
+      }
+
+      // Subjects
+      class Subjects {
+        constructor(subjects = []) {
+          this.items = subjects;
+        }
+
+        add(subject) {
+          if (this.items.includes(subject)) return;
+          this.items.push(subject);
+        }
+
+        // 과제01) 과목 삭제 기능
+        remove(subject) {
+          // 해당 subject 없을 시 return
+          if (!this.items.includes(subject)) return;
+          // subject 배열을 filter 통해 생성된 배열로 교체
+          this.items = this.items.filter(
+            (subjectArr) => !subjectArr.includes(subject)
+          );
+        }
+
+        getValues() {
+          return this.items;
+        }
+      }
+
+      const group = new Students();
+
+      group.addMany(
+        new Student({
+          id: 1,
+          name: "홍길동",
+          level: "C",
+          age: 16,
+          grade: "10학년",
+          major: "문과",
+          subjects: new Subjects(["국어", "영어", "사회", "수학"]),
+        }),
+        new Student({
+          id: 2,
+          name: "김철수",
+          level: "B",
+          age: 17,
+          grade: "11학년",
+          major: "이과",
+          subjects: new Subjects(["물리", "화학", "수학", "영어"]),
+        }),
+        new Student({
+          id: 3,
+          name: "이영희",
+          level: "C",
+          age: 15,
+          grade: "9학년",
+          major: "문과",
+          subjects: new Subjects(["국어", "영어", "사회"]),
+        })
+      );
+
+      group.addSubject("이영희", "국어");
+      group.addSubject("이영희", "사회");
+      group.addSubject("이영희", "체육");
+
+      // 과제01) 과목 삭제 기능
+      group.removeSubject("이영희", "영어");
+
+      // 과제03) 특정 학생 정보 수정 기능
+      group.modify("김철수", {
+        id: 4,
+        name: "남혜빈",
+        level: "A",
+        age: 18,
+        grade: "12학년",
+        major: "이과",
+        subjects: new Subjects(["수학", "과학", "영어"]),
+      });
+
+      // 과제02) 특정 학생 삭제 기능
+      //group.delete("김철수");
+
+      // 과제04) 특정 학생 정보 서술 기능
+      group.makeTxt("이영희");
+
+      // 결과
+      console.log("group", group.getValues());
+
+      /**
+       * 240824 과제
+       * - 과제01) 학생 정보에서 subject에 있는 과목을 삭제할 수 있는 기능 추가
+       * - 과제02) 학생 group에서 특정 학생을 삭제할 수 있는 기능 추가
+       * - 과제03) 학생 group에서 특정 학생 정보를 완전히 교체할 수 있는 기능 추가
+       * - 특정 학생 정보를 서술형으로 반환하는 기능 추가 ex) 제 이름은 000이고, 나이는 000입니다.
+       */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    span.info {
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+  <body>
+    <div class="wrap"></div>
+    <script>
+      "use strict";
+
+      // 과제
+      // 알람기능
+      // 알람 등록을 할 때 밀리세컨드만 입력해서 리스트 생성
+      // [버튼: 동작]
+      // 1번 알람 (2000)
+      // 2번 알람 (3000)
+      // 3번 알람 (4000)
+      // 동작 버튼을 눌렀을 때, 등록한 알람이 순서대로 실행될 것
+      // 표시는 밑에 텍스트로 1번 알람 동작, 2번 알람 동작, 3번 알람 동작 노출
+
+      const wrap = document.querySelector(".wrap");
+
+      // btn 세팅
+      const btn = document.createElement("button");
+      btn.setAttribute("id", "btn");
+      btn.innerText = "동작 버튼";
+      // https://powerku.tistory.com/115#google_vignette 참고!
+      wrap.insertAdjacentElement("afterbegin", btn);
+
+      // 알람 동작 표시 span
+      const span = document.createElement("span");
+      span.classList.add("info");
+      span.innerText = "동작 전!";
+      wrap.insertAdjacentElement("beforeend", span);
+
+      // Promise 객체
+      const timer01 = () =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("1번 알람 동작 (2초)");
+          }, 2000);
+        });
+
+      const timer02 = () =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("2번 알람 동작 (3초)");
+          }, 3000);
+        });
+
+      const timer03 = () =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("3번 알람 동작 (4초)");
+          }, 4000);
+        });
+
+      // 실행
+      btn.addEventListener("click", () => {
+        span.innerText = "동작 시작!";
+
+        timer01()
+          .then((result) => {
+            span.innerText = result;
+            return timer02();
+          })
+          .then((result) => {
+            span.innerText = result;
+            return timer03();
+          })
+          .then((result) => {
+            span.innerText = result;
+          });
+      });
+    </script>
+  </body>
+</html>

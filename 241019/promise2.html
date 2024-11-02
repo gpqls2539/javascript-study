@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * Promise 객체 다루기
+       * 에러 핸들링
+       */
+
+      // resolve: promise를 성공 상태로 만듦
+      // reject: promise를 실패 상태로 만듦
+
+      // setInterval: 일정 시간 마다 콜백함수 실행
+      // setInterval(callback, timer)
+
+      const intervalTimer = new Promise((resolve, reject) => {
+        let count = 0;
+        const interval = setInterval(() => {
+          if (count === 3) reject("fail");
+          count++;
+          //console.log("count", count);
+        }, 1000);
+      });
+
+      // then(성공) / catch(실패)
+      intervalTimer
+        .then((count) => {
+          console.log("count", count);
+        })
+        .catch((error) => console.log("error", error));
+    </script>
+  </body>
+</html>

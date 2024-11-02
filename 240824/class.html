@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      const students = [
+        {
+          id: 1,
+          name: "홍길동",
+          level: "C",
+          age: 16,
+          grade: "10학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회", "수학"],
+        },
+        {
+          id: 2,
+          name: "김철수",
+          level: "B",
+          age: 17,
+          grade: "11학년",
+          major: "이과",
+          subjects: ["물리", "화학", "수학", "영어"],
+        },
+        {
+          id: 3,
+          name: "이영희",
+          level: "C",
+          age: 15,
+          grade: "9학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회"],
+        },
+        {
+          id: 4,
+          name: "박민수",
+          level: "A",
+          age: 18,
+          grade: "12학년",
+          major: "이과",
+          subjects: ["물리", "화학", "수학"],
+        },
+        {
+          id: 5,
+          name: "최지은",
+          level: "C",
+          age: 16,
+          grade: "10학년",
+          major: "예체능",
+          subjects: ["미술", "체육", "음악", "국어"],
+        },
+        {
+          id: 6,
+          name: "강동훈",
+          level: "A",
+          age: 17,
+          grade: "11학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회", "미술"],
+        },
+        {
+          id: 7,
+          name: "정수현",
+          level: "B",
+          age: 15,
+          grade: "9학년",
+          major: "이과",
+          subjects: ["수학", "과학", "영어"],
+        },
+        {
+          id: 8,
+          name: "오진우",
+          level: "C",
+          age: 18,
+          grade: "12학년",
+          major: "예체능",
+          subjects: ["체육", "음악", "미술"],
+        },
+        {
+          id: 9,
+          name: "서유리",
+          level: "B",
+          age: 16,
+          grade: "10학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회", "역사"],
+        },
+        {
+          id: 10,
+          name: "하준호",
+          level: "A",
+          age: 17,
+          grade: "11학년",
+          major: "이과",
+          subjects: ["수학", "물리", "화학", "영어"],
+        },
+      ];
+
+      /**
+       * class라는 키워드로 선언
+       * ex) class ConstructorName {}
+       * 실제 실행 구문이 적용되는 건 constructor() 영역
+       */
+
+      // prototype 상속
+      class Count {
+        getCount() {
+          return this.items.length;
+        }
+      }
+
+      class Cars extends Count {
+        constructor(cars = []) {
+          super();
+          this.items = cars;
+        }
+      }
+
+      class Students extends Count {
+        constructor(items = []) {
+          super();
+          this.items = items;
+        }
+
+        add(student) {
+          this.items.push(student);
+        }
+
+        addMany(...students) {
+          for (let student of students) {
+            this.items.push(student);
+          }
+        }
+
+        addSubject(name, subject) {
+          const index = this.findStudent(name);
+          this.items[index].subjects.add(subject);
+        }
+
+        getValues() {
+          return this.items.map((item) => ({
+            ...item,
+            subjects: item.subjects.getValues(),
+          }));
+        }
+
+        findStudent(name) {
+          return this.items.findIndex((item) => item.name === name);
+        }
+      }
+
+      class Student {
+        constructor({ id, name, level, age, grade, major, subjects }) {
+          this.id = id;
+          this.name = name;
+          this.level = level;
+          this.age = age;
+          this.grade = grade;
+          this.major = major;
+          this.subjects = subjects;
+        }
+      }
+
+      class Subjects {
+        constructor(subjects = []) {
+          this.items = subjects;
+        }
+
+        add(subject) {
+          if (this.items.includes(subject)) return;
+          this.items.push(subject);
+        }
+
+        getValues() {
+          return this.items;
+        }
+      }
+
+      const group = new Students();
+
+      group.addMany(
+        new Student({
+          id: 1,
+          name: "홍길동",
+          level: "C",
+          age: 16,
+          grade: "10학년",
+          major: "문과",
+          subjects: new Subjects(["국어", "영어", "사회", "수학"]),
+        }),
+        new Student({
+          id: 2,
+          name: "김철수",
+          level: "B",
+          age: 17,
+          grade: "11학년",
+          major: "이과",
+          subjects: new Subjects(["물리", "화학", "수학", "영어"]),
+        }),
+        new Student({
+          id: 3,
+          name: "이영희",
+          level: "C",
+          age: 15,
+          grade: "9학년",
+          major: "문과",
+          subjects: new Subjects(["국어", "영어", "사회"]),
+        })
+      );
+
+      group.addSubject("이영희", "국어");
+      group.addSubject("이영희", "사회");
+      group.addSubject("이영희", "체육");
+
+      // console.log("group", group);
+      console.log("group", group.getValues());
+      console.log("groupCount", group.getCount());
+
+      const cars = new Cars("BMW", "KIA", "HYUNDAI");
+      console.log("carsCount", cars.getCount());
+
+      console.log("group", group);
+      console.log("cars", cars);
+
+      /**
+       * 240824 과제
+       * - 학생 정보에서 subject에 있는 과목을 삭제할 수 있는 기능 추가
+       * - 학생 group에서 특정 학생을 삭제할 수 있는 기능 추가
+       * - 학생 group에서 특정 학생 정보를 완전히 교체할 수 있는 기능 추가
+       * - 특정 학생 정보를 서술형으로 반환하는 기능 추가 ex) 제 이름은 000이고, 나이는 000입니다.
+       */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="todoForm">
+      <div>
+        title: <input name="title" type="text" /> completed:
+        <input name="completed" type="checkbox" />
+      </div>
+      <button type="submit" id="submit">등록</button>
+    </form>
+    <script>
+      "use strict";
+
+      /**
+       * fetch: 네트워크 요청
+       * 요청 후 응답은 Promise 객체로 전달 받음
+       *
+       * HTTP Method: GET, POST, PUT, PATCH, DELETE
+       * GET: 데이터를 가져오기 위한 용도 (query string parameter로 옵션 제어)
+       * POST: 데이터를 등록하거나 인증하는 용도
+       * PUT: 데이터를 수정하는 용도 (전체 수정)
+       * PATCH: 데이터를 수정하는 용도 (부분 수정)
+       * DELETE: 데이터를 삭제하는 용도
+       *
+       * POST, PUT, PATCH (request body parameter로 제어)
+       */
+
+      const getTodos = async ({ page, size }) => {
+        const result = await fetch(
+          `https://jsonplaceholder.typicode.com/todos?_start=${page}&_limit=${size}`
+        );
+
+        return result.json();
+      };
+      // getTodos().then((result) => console.log("result", result));
+
+      const createTodoList = async (params) => {
+        const lists = await getTodos(params);
+        const ul = document.createElement("ul");
+
+        for (let list of lists) {
+          const li = document.createElement("li");
+          li.innerHTML = `
+          <h2>${list.title}</h2>
+          <span>completed: ${list.completed}</span>
+          `;
+
+          ul.append(li);
+        }
+
+        document.body.append(ul);
+
+        //console.log("list", list);
+      };
+
+      createTodoList({ page: 195, size: 50 });
+
+      const addTodos = async (params) => {
+        const result = await fetch(
+          "https://jsonplaceholder.typicode.com/todos",
+          {
+            method: "POST",
+            body: JSON.stringify(params),
+          }
+        );
+
+        return result.ok;
+      };
+
+      const form = document.querySelector("#todoForm");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const formParams = Object.fromEntries([...formData.entries()]);
+        const bodyParams = {
+          ...formParams,
+          completed: !!formParams?.completed,
+        };
+
+        //console.log(bodyParams);
+        const success = await addTodos(bodyParams);
+        if (success) {
+          createTodoList({ page: 195, size: 50 });
+        }
+        //console.log(success);
+      });
+    </script>
+  </body>
+</html>

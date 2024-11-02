@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict!";
+
+      /**
+       * sort: 정렬
+       */
+
+      // 숫자도 기본적으로는 문자열처럼 인식해서 앞자리 숫자가 우선
+      const nums = [1, 8, 10, 55, 12, 5, 80];
+      nums.sort((a, b) => b - a); // 내림차순
+
+      const str = ["b", "B", "A", "a", "c", "C", "d"];
+      str.sort();
+      // str.sort().reverse(); 반대로 뒤짚고 싶으면
+      console.log(str);
+
+      const arr = [
+        { id: 1 },
+        { id: 50 },
+        { id: 20 },
+        { id: 10 },
+        { id: 4 },
+        { id: 84 },
+      ];
+
+      arr.sort((a, b) => b.id - a.id);
+      console.log("arr", arr);
+
+      const arr2 = [
+        { type: "한식" },
+        { type: "양식" },
+        { type: "중식" },
+        { type: "한식" },
+        { type: "양식" },
+        { type: "중식" },
+      ];
+
+      arr2.sort((a, b) => {
+        if (a.type === "한식") {
+          return -2;
+        }
+        return 1;
+      });
+      console.log("arr2", arr2);
+    </script>
+  </body>
+</html>

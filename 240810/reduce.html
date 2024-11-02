@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * reduce
+       * 배열을 내가 원하는 어떤 최종적인 형태로 변환하고자 할 때
+       * reduce(callbackFn, initialValue)
+       */
+
+      const nums = [100, 3, 4, 5, 2, 4, 20];
+
+      const sum = nums.reduce((prev, cur) => prev + cur, 0);
+
+      console.log("sum", sum);
+
+      const students = [
+        {
+          id: 1,
+          name: "홍길동",
+          level: "C",
+          age: 16,
+          grade: "10학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회", "수학"],
+        },
+        {
+          id: 2,
+          name: "김철수",
+          level: "B",
+          age: 17,
+          grade: "11학년",
+          major: "이과",
+          subjects: ["물리", "화학", "수학", "영어"],
+        },
+        {
+          id: 3,
+          name: "이영희",
+          level: "C",
+          age: 15,
+          grade: "9학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회"],
+        },
+        {
+          id: 4,
+          name: "박민수",
+          level: "A",
+          age: 18,
+          grade: "12학년",
+          major: "이과",
+          subjects: ["물리", "화학", "수학"],
+        },
+        {
+          id: 5,
+          name: "최지은",
+          level: "C",
+          age: 16,
+          grade: "10학년",
+          major: "예체능",
+          subjects: ["미술", "체육", "음악", "국어"],
+        },
+        {
+          id: 6,
+          name: "강동훈",
+          level: "A",
+          age: 17,
+          grade: "11학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회", "미술"],
+        },
+        {
+          id: 7,
+          name: "정수현",
+          level: "B",
+          age: 15,
+          grade: "9학년",
+          major: "이과",
+          subjects: ["수학", "과학", "영어"],
+        },
+        {
+          id: 8,
+          name: "오진우",
+          level: "C",
+          age: 18,
+          grade: "12학년",
+          major: "예체능",
+          subjects: ["체육", "음악", "미술"],
+        },
+        {
+          id: 9,
+          name: "서유리",
+          level: "B",
+          age: 16,
+          grade: "10학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회", "역사"],
+        },
+        {
+          id: 10,
+          name: "하준호",
+          level: "A",
+          age: 17,
+          grade: "11학년",
+          major: "이과",
+          subjects: ["수학", "물리", "화학", "영어"],
+        },
+      ];
+
+      const group = students.reduce((prev, cur) => {
+        if (!Object.hasOwn(prev, cur.level)) {
+          prev[cur.level] = [cur];
+        } else {
+          prev[cur.level].push(cur);
+        }
+        return prev;
+      }, {});
+
+      console.log(group);
+
+      // ** 모든 과목 분류 -- 240810 과제
+      // ** 생성자 함수로 전환 -- 240810 과제
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * backtick(``) or template literal
+       * `` 내부에 변수를 활용하기 위해 ${} 형식의 구문을 활용
+       */
+
+      const person = {
+        name: "hyebin",
+        age: "10",
+        gender: "female",
+        class: {
+          name: "A",
+          total: "30",
+          subject: "수학",
+        },
+      };
+
+      const str = person.name + " is " + person.age;
+      console.log("str", str);
+      const literal = `${person.name} is ${person.age}`;
+      console.log("literal", literal);
+
+      if (person.name === "hyebin" && person.age === "10") {
+        // 중첩으로 조건물을 활용하는 경우 예외 처리도 별도로 해줘야함
+        if (person.class.name === "B") {
+          console.log(`${person.name} is ${person.age}`);
+        } else {
+          console.log("찾을 수 없습니다.");
+        }
+      } else {
+        console.log("찾을 수 없습니다.");
+      }
+
+      // 구문을 여기 실행할거라면 조건이 참이던 거짓이던 실행할 구문이 필요
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test1"></div>
+    <script>
+      "use strict";
+
+      console.log("window", window);
+
+      // 이벤트 루프 **
+      // call stack
+      // 선입후출, 후입선출
+
+      // queue
+      // 선입선출
+
+      function a() {
+        function b() {
+          function c() {
+            console.log("c");
+          }
+          c();
+          console.log("b");
+        }
+        // 비동기 메서드
+        setTimeout(() => console.log("time out"), 0);
+
+        b();
+        console.log("a");
+      }
+
+      a();
+
+      // a -> setTimeout -> b -> c
+      // result: c -> b -> a -> setTimeout
+    </script>
+  </body>
+</html>

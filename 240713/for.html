@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * 반복문의 활용
+       * for(초기화 변수, 조건문, 증감식)
+       */
+
+      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      let sum = 0;
+
+      for (let i = 0; i < arr.length; i++) {
+        // 증감식이 수행될 때마다 블럭 내의 구문이 한번씩 실행된다.
+        const num = arr[i];
+
+        console.log(num);
+        sum += num;
+      }
+
+      console.log("sum", sum);
+
+      // 역순 접근
+      for (let i = arr.length - 1; i >= 0; i--) {
+        console.log("역순 i", arr[i]);
+      }
+
+      // 이중 for 문
+      const arr2 = [
+        [1, 2, 3],
+        [4, 5, 6, 7],
+        [8, 9],
+      ];
+
+      for (let i = 0; i < arr2.length; i++) {
+        for (let j = 0; j < arr2[i].length; j++) {
+          console.log(arr2[i][j]);
+        }
+      }
+    </script>
+  </body>
+</html>

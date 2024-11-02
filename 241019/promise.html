@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * Promise 객체 다루기
+       */
+
+      // resolve: promise를 성공 상태로 만듦
+      // reject: promise를 실패 상태로 만듦
+
+      // setTimeOut: 일정 시간 뒤에 콜백함수 실행
+      // setTimeOut(callback, timer)
+
+      const timer = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve("success");
+        }, 3000);
+      });
+
+      // resolve -> fulfilled 상태로 바뀜
+      setTimeout(() => {
+        console.log("timer", timer);
+      }, 5000);
+
+      // then -> resolve가 실행된 이후 resolve에 전달된 값을 받을 수 있음
+      timer.then((result) => {
+        console.log("timer result", result);
+      });
+    </script>
+  </body>
+</html>

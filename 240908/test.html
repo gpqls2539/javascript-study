@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="btnWrap">
+      <input class="input" type="text" />
+      <button id="addBtn" type="button" onclick="addList()">추가</button>
+      <button id="removeBtn" type="button" onclick="removeList()">삭제</button>
+    </div>
+    <ul id="wrap"></ul>
+    <script>
+      "use strict";
+
+      const students = [
+        {
+          id: 1,
+          name: "홍길동",
+          level: "C",
+          age: 16,
+          grade: "10학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회", "수학"],
+        },
+        {
+          id: 2,
+          name: "김철수",
+          level: "B",
+          age: 17,
+          grade: "11학년",
+          major: "이과",
+          subjects: ["물리", "화학", "수학", "영어"],
+        },
+        {
+          id: 3,
+          name: "이영희",
+          level: "C",
+          age: 15,
+          grade: "9학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회"],
+        },
+        {
+          id: 4,
+          name: "박민수",
+          level: "A",
+          age: 18,
+          grade: "12학년",
+          major: "이과",
+          subjects: ["물리", "화학", "수학"],
+        },
+        {
+          id: 5,
+          name: "최지은",
+          level: "C",
+          age: 16,
+          grade: "10학년",
+          major: "예체능",
+          subjects: ["미술", "체육", "음악", "국어"],
+        },
+        {
+          id: 6,
+          name: "강동훈",
+          level: "A",
+          age: 17,
+          grade: "11학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회", "미술"],
+        },
+        {
+          id: 7,
+          name: "정수현",
+          level: "B",
+          age: 15,
+          grade: "9학년",
+          major: "이과",
+          subjects: ["수학", "과학", "영어"],
+        },
+        {
+          id: 8,
+          name: "오진우",
+          level: "C",
+          age: 18,
+          grade: "12학년",
+          major: "예체능",
+          subjects: ["체육", "음악", "미술"],
+        },
+        {
+          id: 9,
+          name: "서유리",
+          level: "B",
+          age: 16,
+          grade: "10학년",
+          major: "문과",
+          subjects: ["국어", "영어", "사회", "역사"],
+        },
+        {
+          id: 10,
+          name: "하준호",
+          level: "A",
+          age: 17,
+          grade: "11학년",
+          major: "이과",
+          subjects: ["수학", "물리", "화학", "영어"],
+        },
+      ];
+
+      class Students {
+        constructor(items = []) {
+          this.items = items;
+        }
+
+        // 학생 추가
+        addMany(...students) {
+          for (let student of students) {
+            this.items.push(student);
+          }
+        }
+
+        // 학생 이름으로 idx 찾기
+        findStudent(name) {
+          return this.items.findIndex((item) => item.name === name);
+        }
+
+        // 과제01) 학생 정보 리스트에 뿌리기
+        addDom(name) {
+          const idx = this.findStudent(name);
+          const item = this.items[idx];
+          const keys = Object.keys(item);
+          const wrap = document.getElementById("wrap"); //#wrap
+
+          for (let i = 0; i < keys.length; i++) {
+            let key = Object.keys(item)[i]; // 학생정보 객체의 key
+            let wrapInner = wrap.innerHTML; // #wrap의 innerHTML
+
+            if (key === "subjects") {
+              wrap.innerHTML = `${wrapInner}<li>${key}: ${this.items[
+                idx
+              ].subjects.getValues()}</li>`;
+            } else {
+              wrap.innerHTML = `${wrapInner}<li>${key}: ${item[key]}</li>`;
+            }
+          }
+          return item;
+        }
+
+        // 학생 return
+        getValues() {
+          return this.items.map((item) => ({
+            ...item,
+            subjects: item.subjects.getValues(),
+          }));
+        }
+      }
+
+      class Student {
+        constructor({ id, name, level, age, grade, major, subjects }) {
+          this.id = id;
+          this.name = name;
+          this.level = level;
+          this.age = age;
+          this.grade = grade;
+          this.major = major;
+          this.subjects = subjects;
+        }
+      }
+
+      class Subjects {
+        constructor(subjects = []) {
+          this.items = subjects;
+        }
+
+        // subjects 값 리턴
+        getValues() {
+          return this.items;
+        }
+      }
+
+      const group = new Students();
+
+      group.addMany(
+        new Student({
+          id: 1,
+          name: "홍길동",
+          level: "C",
+          age: 16,
+          grade: "10학년",
+          major: "문과",
+          subjects: new Subjects(["국어", "영어", "사회", "수학"]),
+        }),
+        new Student({
+          id: 2,
+          name: "김철수",
+          level: "B",
+          age: 17,
+          grade: "11학년",
+          major: "이과",
+          subjects: new Subjects(["물리", "화학", "수학", "영어"]),
+        }),
+        new Student({
+          id: 3,
+          name: "이영희",
+          level: "C",
+          age: 15,
+          grade: "9학년",
+          major: "문과",
+          subjects: new Subjects(["국어", "영어", "사회"]),
+        })
+      );
+
+      //group.getValue 실행
+      const getValues = group.getValues();
+      console.log("getValue", getValues);
+
+      //group.addDom 실행
+      // 과제01) innerHTML을 이용해서 students 정보를 리스트에 뿌려주기
+      console.log("addDom", group.addDom("이영희"));
+
+      // 과제02-1) 리스트 추가
+      function addList() {
+        let inputValue = document.querySelector(".input").value;
+        let wrapInner = document.querySelector("#wrap").innerHTML;
+
+        if (inputValue !== "") {
+          document.querySelector(
+            "#wrap"
+          ).innerHTML = `${wrapInner}<li>${inputValue}</li>`;
+        }
+      }
+
+      // 과제02-2) 리스트 삭제
+      function removeList() {
+        let inputValue = document.querySelector(".input").value;
+        let wrapInner = document.querySelector("#wrap").innerHTML;
+        let lists = document.querySelectorAll("#wrap li");
+
+        lists.forEach((list) => {
+          if (inputValue === list.innerHTML) {
+            list.remove();
+          }
+        });
+      }
+
+      // 과제
+      // 01) students 정보를 리스트에 뿌려주기 innerHTML을 활용해서
+      // class 생성자 활용
+
+      // 고민해볼 것
+      // 02) 리스트를 삭제, 추가 했을 때 화면에 반영하기
+    </script>
+  </body>
+</html>

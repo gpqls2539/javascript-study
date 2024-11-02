@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * object prototype method
+       */
+
+      const obj = { a: 1, b: 2 }; // ax0000
+      const obj2 = { c: "a", d: "b" }; // ax0001
+
+      // assign
+      // 객체끼리 합치는 용도로 사용 (기준 객체에) (전개연산자가 나온 이후로는 잘 사용하지 않음)
+
+      const assign = Object.assign({}, obj, obj2); // ax0003
+      obj.a = 5;
+      obj2.d = "g";
+
+      console.log(assign);
+
+      const spread = {
+        ...obj,
+        ...obj2,
+      };
+
+      console.log("spread", spread);
+
+      const create = Object.create(null);
+      console.log("create", create);
+
+      // object key, value, entries
+      // keys: object key만 뽑아서 array로 반환
+      const spreadKeys = Object.keys(spread);
+      // values: object value만 뽑아서 array로 반환
+      const spreadValues = Object.values(spread);
+      // entries: object key, value를 한쌍으로 이차원 array로 반환
+      const spreadEntries = Object.entries(spread);
+
+      console.log("spreadvalues", spreadKeys);
+      console.log("spreadValues", spreadValues);
+      console.log("spreadEntries", spreadEntries);
+
+      //fromEntries
+      // key, value 2차원 배열의 구조만 정확히 맞춘다면 객체로 변환이 가능
+
+      const objArray = [
+        ["name", "hyebin"],
+        ["age", "20"],
+        ["gender", "female"],
+      ];
+
+      const people = Object.fromEntries(objArray);
+
+      console.log("people", people);
+
+      // freeze: 객체를 고정하는 용도, 변경을 시도하면 에러 발생
+
+      people.age = 32;
+      console.log("people", people);
+
+      const freezePeople = Object.freeze(people);
+      console.log("freezePeople", freezePeople);
+
+      // freezePeople.age = 45;
+      // console.log("freezePeople", freezePeople);
+
+      // groupBy(targetArray, callback)
+      // callback에서 반환하는 key를 기준으로 grouping을 해줌
+
+      const inventory = [
+        { name: "asparagus", type: "vegetables", quantity: 5 },
+        { name: "bananas", type: "fruit", quantity: 0 },
+        { name: "goat", type: "meat", quantity: 23 },
+        { name: "cherries", type: "fruit", quantity: 5 },
+        { name: "fish", type: "meat", quantity: 22 },
+      ];
+
+      const groupInventory = Object.groupBy(inventory, (item) => item.type);
+
+      console.log("groupInventory", groupInventory);
+
+      // hasOwn
+      // 객체 내에 해당 key가 있나 없나를 판별
+      // prototype의 속성은 제외하고 판별
+
+      const obj3 = { name: "asparagus", type: "vegetables", quantity: 5 };
+
+      console.log(Object.hasOwn(obj3, "name"));
+      console.log(Object.hasOwn(obj3, "type"));
+      console.log(Object.hasOwn(obj3, "age"));
+      console.log(Object.hasOwn(obj3, "toString"));
+
+      // is
+      // 2개의 값이 같은지 다른지 여부를 반환(boolean)
+
+      console.log("a === a", "a" === "a");
+      console.log("a === a", Object.is("a", "a"));
+
+      const array = [];
+      const array2 = [];
+
+      console.log("array === array", array === array);
+      console.log("array === array2", array === array2);
+      console.log("array === array", Object.is(array, array));
+      console.log("array === array2", Object.is(array, array2));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * 표현식과 연산자
+       */
+
+      // 할당연산자(=): 변수에 값을 할당하는 역할
+      const a = 10;
+      let b = "str";
+
+      // 비교연산자: 값을 비교해서 boolean으로 해석하기 위한 역할
+      // 언제나 boolean을 반환
+
+      console.log("단순 비교", true === false);
+
+      // 타입 무시 비교(==): 숫자와 문자 타입만 무시해줌
+      // 지금은 아예 사용하지 않는 것을 권장
+      console.log("10 == '10'", 10 == "10"); // true
+      console.log("true == 'true'", true == "true"); // false
+      console.log("undefined == 'undefined'", undefined == "undefined"); // false
+
+      // 타입 포함 비교(===)
+      console.log("10 === '10'", 10 === "10"); // false
+
+      // 크기 비교
+      // 언제나 해석은 왼쪽에서 오른쪽으로
+      // 숫자형 혹은 Date 타입을 비교하는 경우에 쓰임
+      // a > b a가 b보다 크다
+      // a < b a가 b보다 작다
+      // a >= b a가 b보다 크거나 같다
+      // a <= b a가 b보다 작거나 같다
+
+      console.log("1 > 10", 1 > 10); // false
+      console.log("11 > 10", 11 > 10); // true
+      console.log("10 < 5", 10 < 5); // false
+      console.log("23 < 50", 23 < 50); // true
+      console.log("20 >= 20", 20 >= 20); // true
+      console.log("30 <= 30", 30 <= 30); // true
+
+      // 불일치 연산자 (!==)
+      // 일치(===)의 반대 표현
+
+      console.log("10 !== 10", 10 !== 10); // false
+      console.log("20 !== 21", 20 !== 21); // true
+
+      // 산술연산자 (숫자형에서만 사용)
+      // + 더하기 (문자형에서 사용 가능)
+      // - 빼기
+      // * 곱하기
+      // / 나누기
+      // % 나머지
+      // ** 제곱
+
+      console.log("my name is " + "hyebin"); // my name is hyebin
+      console.log(13 + 7); // 20
+      console.log(13 - 7); // 6
+      console.log(5 * 5); // 25
+      console.log(10 / 2); // 5
+      console.log(10 % 5); // 0
+      console.log(10 % 4); // 2
+      console.log(2 ** 2); // 4
+
+      // 증감연산자
+      // ++ 현재 숫자에 1을 더함
+      // -- 현재 숫자에 1을 뺌
+      // const에는 사용 불가
+      // 증감연산자는 가급적 지양
+      // num = num + 1로 대체 가능
+
+      let num = 10;
+      console.log("num", ++num); // 11
+      console.log("num", num++); // 11 // 왠만하면 뒤에 ++을 붙이지 않음
+      console.log("num", num); // 12
+
+      // 논리연산자
+      // a && b and 연산자 (a도 true, b도 true일 때 true)
+      // && 연산자는 false를 만나면 false 부분을 반환하고 끝
+      // a || b or 연산자 ((a 혹은 b가 하나만 true여도 true)
+      // || 연산자는 true를 반환하고 끝
+
+      // 부정연산자(!)
+      // true면 false, false면 true로 전환
+      // 강제로 bollean으로 변환
+      // !true > false
+      // !false > true
+
+      console.log("true && true", true && true); // true
+      console.log("false && true", false && true); // false
+      console.log("false || false", false || false); // false
+      console.log("false || true", false || true); // true
+
+      // 부정연산자를 연속(!!)으로 사용해서 boolean으로 강제 해석할 수 있음
+      console.log("0 && 1", !!(0 && 1)); // false
+      console.log("'str' && 'str2'", "str" && "str2"); // str2
+      console.log("'str' && ''", "str" && ""); // ''
+    </script>
+  </body>
+</html>

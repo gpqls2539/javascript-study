@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * String.prototype
+       * string 데이터 타입을 제어하기 위한 메서드(함수)를 제공
+       */
+
+      const str = "string text";
+
+      // at: index를 기준으로 해당 위치의 문자열을 반환
+      // 음수로 접근하면 뒤에서부터 접근 가능
+      console.log("str.at(0)", str.at(0));
+      console.log("str.at(3)", str.at(3));
+      console.log("str.at(-2)", str.at(-2));
+
+      // charAt: index를 기준으로 해당 위치의 문자열을 반환
+      // es6 이전 버전으로 문자열 index를 접근하는 방법: 음수 접근 불가
+      // at이 나온 이후로는 사용하지 않음
+      console.log("str.charAt(0)", str.charAt(0));
+      console.log("str.charAt(0)", str.charAt(-2));
+
+      // concat: 특정 문자를 기준으로 문자열을 합치는 용도
+      // 매개변수에 포함되는 모든 문자를 합쳐줌
+      const hello = "Hello";
+      const world = "World!!";
+
+      console.log("hello concat world", hello.concat(",", world));
+      console.log(`${hello}, ${world}`);
+
+      // startsWidth, endsWidth
+      // 특정 문자가 해당 문자로 시작하는지 끝나는지 여부를 반환(boolean)
+      // startsWidth(searchString, position): position은 필수가 아님(0부터 시작)
+      // position을 입력하면 해당 index부터 문자가 시작되는지를 확인
+      console.log('str startsWidth "tri"', str.startsWith("tri", 1));
+      console.log('str startsWidth "stri"', str.startsWith("stri"));
+
+      console.log('str endsWidth "xt"', str.endsWith("xt"));
+      // 뭔가 길이로 매칭함
+      console.log('str endsWidth "tex"', str.endsWith("tex", 10));
+
+      // includes: 문자 내에 내가 찾고자 하는 문자가 포함되어 있는지 여부
+      // startsWidth, endsWidth와의 차이는 그 문자로 시작하는지 끝나는지 여부는 알 수 없음
+      console.log('str includes "ring"', str.includes("ring t"));
+
+      // indexOf: 찾고자 하는 문자가 어느 index부터 시작하는지를 반환
+      // 같은 문자를 찾더라도 처음에 찾는 문자열의 index만 반환
+      console.log('str indexOf "text"', str.indexOf("text"));
+
+      // padStart: 문자를 해당 문자를 포함해서 내가 원하는 특정 문자로 채워주는 역할
+      // padStart (채우고자 하는 길이, 채우고자 하는 문자)
+      const price = "500원";
+      console.log("pad 12 *", price.padStart(12, "0"));
+
+      const price2 = "453452";
+      const decimal = "12";
+      console.log("decimal number", `${price2}.${decimal.padEnd(8, "0")}`);
+
+      // repeat: 특정 문자를 몇번 반복한 횟수로 반복해서 반환
+      console.log("repeat 3", "abc".repeat(3));
+
+      // replace: 특정 문자를 입력한 문자로 교체할 때 사용
+      // replace(변경하고자 하는 문자, 변경할 문자)
+      // 처음에 찾은 문자만 변경
+      const paragraph = "I think Ruth's dog is cuter than your dog!";
+      console.log("dog to fox: ", paragraph.replace("dog", "fox"));
+
+      // replaceAll: 변경하고자 하는 모든 문자를 변경할 문자로 변경
+      // 어떤 패턴에 맞춘 변경을 할 수는 업음 -> replace에 정규식을 활용하는 방법을 더 많이 사용
+      console.log("dog to cat: ", paragraph.replaceAll("dog", "cat"));
+
+      // replaceAll와 비슷하게 동작하는 정규식 활용
+      console.log("dog to rabbit: ", paragraph.replace(/dog/g, "rabbit"));
+
+      // split: 문자를 특정 문자를 기반으로 분리한다(배열로 반환)
+      console.log('paragraph split ""', paragraph.split(" "));
+
+      // array join: 배열을 합쳐줌
+      const splitText = paragraph.split(" ");
+      console.log("splitText", splitText);
+      console.log(splitText.join(" "));
+
+      // toLowerCase, toUpperCase
+      // 모두 소문자로 반환 혹은 대문자로 반환
+      console.log("paragraph to lowerCate", paragraph.toLowerCase());
+      console.log("paragraph to upperCate", paragraph.toUpperCase());
+
+      // trim: 공백 문자를 앞뒤로 제거해줌
+      // trimStart: 앞에 공백 문자를 제거
+      // trimEnd: 뒤에 공백 문자를 제거
+
+      const text = "     I think Ruth's dog is cuter than your dog!    ";
+      console.log(text.trim().at(0));
+    </script>
+  </body>
+</html>

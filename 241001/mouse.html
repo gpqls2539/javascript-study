@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        background-color: #eee;
+        overflow: hidden;
+        margin: 100px;
+      }
+
+      #container > #box {
+        width: 50px;
+        height: 50px;
+        background-color: #000;
+        position: absolute;
+        cursor: grab;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="box"></div>
+    </div>
+    <script>
+      "use strict";
+
+      /**
+       * 마우스 이벤트 제어하기
+       */
+
+      const container = document.querySelector("#container");
+      const target = document.querySelector("#box");
+      // getBoundingClientRect: 타겟이 가진 좌표와 크기 값을 가져옴
+      const { width: containerWidth, height: containerHeight } =
+        container.getBoundingClientRect();
+      const { width, height } = target.getBoundingClientRect();
+      let isDrag = false;
+
+      const boxHalfWidth = width / 2;
+      const boxHalfHeight = height / 2;
+
+      //console.log(boxOffset);
+
+      target.addEventListener("mousedown", () => {
+        console.log("mouseDown");
+        isDrag = true;
+      });
+
+      target.addEventListener("mouseup", () => {
+        console.log("mouseUp");
+        isDrag = false;
+      });
+
+      target.addEventListener("mousemove", (event) => {
+        if (!isDrag) return;
+
+        const { layerX, layerY } = event;
+        const mouseMoveX = layerX - boxHalfWidth;
+        const mouseMoveY = layerY - boxHalfHeight;
+        const maxMoveX = containerWidth - width;
+        const maxMoveY = containerHeight - height;
+
+        // console.log("layerX", layerX);
+        // console.log("layerY", layerY);
+
+        if (mouseMoveX <= 0) return;
+        if (mouseMoveY <= 0) return;
+        if (mouseMoveX >= maxMoveX) return;
+        if (mouseMoveY >= maxMoveY) return;
+
+        target.style.transform = `translate(${mouseMoveX}px, ${mouseMoveY}px)`;
+      });
+    </script>
+  </body>
+</html>

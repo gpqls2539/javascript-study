@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * string 자르기
+       * slice: 시작 index ~ 끝 index -1까지 복사한다. (원본 텍스트가 손상되지 않는다.)
+       * substring: 개념은 slice와 같으나 음수 index 접근이 안됨
+       */
+
+      const text = "I think Ruth's dog is cuter than your dog!";
+
+      // slice
+      const slice = text.slice(2, 7);
+      console.log("slice", slice);
+      console.log("text", text);
+
+      // 음수로 접근해서 자르기
+
+      const slice2 = text.slice(-9, -1);
+      const slice3 = text.slice(-9); // start index만 넣으면 마지막까지 자름
+      console.log("slice2", slice2);
+      console.log("slice3", slice3);
+    </script>
+  </body>
+</html>

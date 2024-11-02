@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        line-height: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      "use strict!";
+
+      // 정사각형
+      for (let i = 0; i < 7; i++) {
+        for (let j = 0; j < 7; j++) {
+          document.write("*");
+        }
+        document.write("<br/>");
+      }
+
+      document.write("<br/>");
+      document.write("---------------------------------");
+      document.write("<br/>");
+      document.write("<br/>");
+
+      // 별
+      for (let i = 0; i < 7; i++) {
+        for (let j = 0; j <= i; j++) {
+          document.write("*");
+        }
+        document.write("<br/>");
+      }
+
+      document.write("<br/>");
+      document.write("---------------------------------");
+      document.write("<br/>");
+      document.write("<br/>");
+
+      // 별
+      for (let i = 0; i < 7; i++) {
+        for (let j = 7; j > i; j--) {
+          document.write("*");
+        }
+        document.write("<br/>");
+      }
+
+      // 과제
+      // 정삼각형, 정삼각형 역순을 그려오세요
+      // 빈 부분들에 대한 글자 처리는 공백 문자(&nbsp;)로 채움
+    </script>
+  </body>
+</html>

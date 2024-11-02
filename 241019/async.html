@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * async/await
+       *
+       * await가 동작하기 위해서는 반드시 함수가 async 함수여야 한다.
+       * await는 반드시는 아니나 Promise 객체를 대기 시킨다.
+       */
+
+      const timer1 = () =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("success1");
+          }, 2000);
+        });
+
+      const timer2 = () =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            reject("success2");
+          }, 2000);
+        });
+
+      const timer3 = () =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("success3");
+          }, 2000);
+        });
+
+      // 함수앞에 async 구문을 붙여줘야한다.
+      const timerAll = async () => {
+        try {
+          const result1 = await timer1();
+          console.log("timer1", result1);
+          const result2 = await timer2();
+          console.log("timer2", result2);
+          const result3 = await timer3();
+          console.log("timer3", result3);
+        } catch (err) {
+          // await 중에 하나라도 에러가 발생하면 catch가 실행됨 (이후 구문은 실행하지 않음)
+          console.log("error", err);
+        }
+      };
+
+      timerAll();
+
+      // 과제
+      // 알람기능
+      // 알람 등록을 할 때 밀리세컨드만 입력해서 리스트 생성
+      // [버튼: 동작]
+      // 1번 알람 (2000)
+      // 2번 알람 (3000)
+      // 3번 알람 (4000)
+      // 동작 버튼을 눌렀을 때, 등록한 알람이 순서대로 실행될 것
+      // 표시는 밑에 텍스트로 1번 알람 동작, 2번 알람 동작, 3번 알람 동작 노출
+    </script>
+  </body>
+</html>

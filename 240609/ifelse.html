@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * if else (조건문)
+       * if (참)이면 {} 실행
+       * (거짓)이면 else 조건 실행
+       * else if (): if 조건이 거짓일 때 다음 조건으로 활용
+       * if -> else if -> else
+       */
+
+      let input = window.prompt();
+
+      // if (input) {
+      //   console.log("참");
+      // } else {
+      //   console.log("거짓");
+      // }
+
+      if (input === "거북이") {
+        // if가 일치하지 않을 때만 else if로 넘어감
+        console.log("거북이");
+      } else if (input === "토끼") {
+        console.log("토끼");
+      } else if (input === "독수리") {
+        console.log("독수리");
+      } else {
+        console.log("일치하는게 없다.");
+      }
+    </script>
+  </body>
+</html>

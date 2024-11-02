@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict!";
+
+      /**
+       * 함수(function)
+       * 선언식과 표현식이 있음
+       * 선언식: function 키워드로 선언
+       * - function + functionName + () + {}
+       */
+
+      // 변수 네이밍 방법
+      // camelCase(lowerCamelCase): 소문자로 시작하고 단어와 단어 사이를 대문자로 표현
+      // PascalCase(UpperCamelCase): 대문자로 시작하고 단어와 단어 사이를 대문자로
+      // 변수, 함수 표현할 때는 대부분의 상황에서 camelCase 사용
+      // 클래스나 생성자를 표현할 때는 PascalCase 사용
+
+      // snake_case: 단어와 단어 사이를 언더바(_)로 표현
+      // kebab-case: 단어와 단어 사이를 하이픈(-)으로 표현
+      // 폴더나 파일명을 표현할 때는 2가지 케이스를 여전히 자주 사용함
+
+      // function의 반환값을 위해서는 반드시 return이 필요
+      // return이 없는 경우 undefined 반환
+      // return이 들어가면 반드시 함수가 종료됨
+      // 함수는 반드시 실행을 해야한다 (선언과 실행은 다르다)
+
+      function getName() {
+        return "hyebin";
+      }
+
+      console.log(getName());
+
+      // 변수에 담을 때 방식이 2가지
+      // function 키워드를 사용 ( function() {} )
+      // arrow function을 사용 ( () => {} )
+
+      // 익명함수와 기명함수
+      // 익명함수는 이름이 없는 함수인데 function 키워드를 사용
+      // 기명함수는 이름이 있는 함수
+      const getAge = function () {
+        return 12;
+      };
+
+      console.log(getAge());
+
+      // hoisting (호이스팅)
+      // 구문을 실행하기 전 전체 변수를 끌어올려서 정합성 여부를 판단하는 과정
+
+      // 선언식 함수는 호이스팅 과정에서 가장 최상위 위치에 함수가 선언됨
+      console.log(a);
+      function a() {}
+
+      // console.log(b);
+      // const b = function () {};
+
+      // arrow function
+      // 무조건 표현식만 가능
+      // 최근에는 function 키워드를 사용하는 것보단 화살표 함수를 사용한다
+      // es6 이후로 화살표 함수가 생긴 다음부터 function 사용하지 않음
+
+      let num1 = 5;
+      let num2 = 4;
+      let result = 0;
+
+      const sum = () => {
+        result = num1 + num2;
+      };
+
+      console.log(sum()); // sum()
+      console.log("sum result", result);
+
+      // 매개변수
+      // 함수 내부에 전달하는
+      // (매개변수 영역) => {}
+      // 매개변수에 아무 값도 전달하지 않으면 기본적으로 undefined
+      // 매개변수에 전달하는 데이터 타입은 뭐든 상관없음
+
+      // default parameter
+      // 매개변수에 아무 값도 전달이 안됐을 때의 기본값 저장
+      // undefined 전달하면 기본값 동작
+      const sum2 = (a, b, c = 0) => {
+        return a + b + c;
+      };
+
+      console.log(sum2(3, 4));
+      console.log(sum2(2, 8, 10));
+
+      const calculator = (a, b) => {
+        return a + b;
+      };
+
+      console.log(calculator(sum2(1, 3), sum2(5, 7)));
+
+      // 계산 함수 만들기
+      // 더하기, 곱하기, 나누기, 빼기 함수 구현
+    </script>
+  </body>
+</html>

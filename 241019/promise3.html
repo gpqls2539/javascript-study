@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      /**
+       * Promise 객체 다루기
+       */
+
+      // resolve: promise를 성공 상태로 만듦
+      // reject: promise를 실패 상태로 만듦
+
+      // setTimeOut: 일정 시간 뒤에 콜백함수 실행
+      // setTimeOut(callback, timer)
+
+      // return
+      const timer1 = () =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("success1");
+          }, 2000);
+        });
+
+      const timer2 = () =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("success2");
+          }, 2000);
+        });
+
+      const timer3 = () =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("success3");
+          }, 2000);
+        });
+
+      // // resolve -> fulfilled 상태로 바뀜
+      // setTimeout(() => {
+      //   console.log("timer", timer);
+      // }, 5000);
+
+      // then -> resolve가 실행된 이후 resolve에 전달된 값을 받을 수 있음
+      timer1()
+        .then((result) => {
+          console.log("timer1 result", result);
+          return timer2();
+        })
+        .then((result) => {
+          console.log("timer2 result", result);
+          return timer3();
+        })
+        .then((result) => {
+          console.log("timer3 result", result);
+        });
+
+      // primiseAll
+      const promiseAll = Promise.all([timer1(), timer2(), timer3()]);
+
+      promiseAll.then((result) => {
+        console.log("all result", result);
+      });
+    </script>
+  </body>
+</html>

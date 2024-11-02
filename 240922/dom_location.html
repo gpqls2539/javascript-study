@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="wrap">
+      <ul id="list"></ul>
+    </div>
+    <script>
+      "use strict";
+
+      const list = [1, 2, 3, 4, 5, 6];
+
+      const ul = document.querySelector("#list");
+
+      ul.innerHTML = list
+        .map((item) => `<li id="item${item}">${item}</li>`)
+        .join("");
+
+      const select = document.querySelector("#item4");
+      const firstChild =
+        select.previousElementSibling.previousElementSibling
+          .previousElementSibling; // 없으면 null
+      const lastChild = select.nextElementSibling.nextElementSibling; // 없으면 null
+
+      console.log("firstChild", firstChild);
+      console.log("lastChild", lastChild);
+
+      // 타켓을 기준으로 모든 이전 혹은 이후 항목을 선택하는 것은 자바스크립트에서 제공하지 않음
+      // 별도 함수로 작성해서 처리
+      function previousSiblings(target) {
+        let previous = target.previousElementSibling;
+        const result = [];
+
+        while (previous) {
+          result.push(previous);
+          previous = previous.previousElementSibling;
+        }
+
+        return result;
+      }
+      function nextSiblings(target) {
+        let next = target.nextElementSibling;
+        const result = [];
+
+        while (next) {
+          result.push(next);
+          next = next.nextElementSibling;
+        }
+
+        return result;
+      }
+
+      const target = document.querySelector("#item4");
+      const nextList = nextSiblings(target);
+      const previousList = previousSiblings(target);
+
+      console.log("previousList", previousList);
+      console.log("nextList", nextList);
+
+      console.log("otherList", [...previousList, ...nextList]);
+
+      // 부모 요소 선택
+      const parent = document.querySelector("li");
+      console.log("parent", parent.parentElement.parentElement);
+
+      // 내가 원하는 부모 요소 지점까지 검색
+      const closest = document.querySelector("li").closest("#wrap");
+      console.log("closest", closest);
+
+      // 처음과 마지막 엘리먼트 접근
+      const first = document.getElementById("list").firstElementChild;
+      const last = document.getElementById("list").lastElementChild;
+
+      console.log("first", first);
+      console.log("last", last);
+    </script>
+  </body>
+</html>

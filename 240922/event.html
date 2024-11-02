@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .boxWrap {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 10px 0;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: #eee;
+        &.active {
+          background-color: red;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn1">1</button>
+    <button id="btn2">2</button>
+    <button id="btn3">3</button>
+
+    <div class="boxWrap">
+      <div id="box1" class="box"></div>
+      <div id="box2" class="box"></div>
+      <div id="box3" class="box"></div>
+    </div>
+    <script>
+      "use strict";
+
+      const btn1 = document.querySelector("#btn1");
+      const btn2 = document.querySelector("#btn2");
+      const btn3 = document.querySelector("#btn3");
+
+      // addEventListener
+      // 선택된 dom 요소에 이벤트 부여
+      // addEventListener(eventType, callbackFn)
+      // 코백함수 매개변수에는 언제나 event 정보를 제공함
+
+      btn1.addEventListener("click", (event) => {
+        console.log("btn1 click", event);
+        // console.log("btn3", event.target.nextElementSibling.nextElementSibling);
+        const target = event.target;
+        const id = target.textContent;
+        console.log("id", id);
+        const box = document.querySelector(`#box${id}`);
+        const isActive = box.classList.contains("active");
+
+        if (isActive) {
+          box.classList.remove("active");
+        } else {
+          box.classList.add("active");
+        }
+      });
+      btn2.addEventListener("click", () => {
+        console.log("btn2 click");
+      });
+      btn3.addEventListener("click", () => {
+        console.log("btn3 click");
+      });
+    </script>
+  </body>
+</html>
